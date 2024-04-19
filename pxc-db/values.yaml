@@ -52,7 +52,7 @@ tls: {}
   #   group: cert-manager.io
 
 pxc:
-  size: 3
+  size: 5
   image:
     repository: docker.io/percona/percona-xtradb-cluster
     tag: 8.0.35-27.1
@@ -506,7 +506,7 @@ proxysql:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    # storageClass: "-"
+    storageClass: csi-rbd-sc
     accessMode: ReadWriteOnce
     size: 8Gi
   # A custom Kubernetes Security Context for a Container to be used instead of the default one
@@ -557,7 +557,7 @@ pmm:
     limits: {}
 
 backup:
-  enabled: true
+  enabled: false
   # allowParallel: true
   image:
     repository: docker.io/percona/percona-xtradb-cluster-operator
@@ -662,10 +662,10 @@ backup:
     #     storageClass: Hot
 
   schedule: 
-     - name: "daily-backup"
-       schedule: "0 0 * * *"
-       keep: 5
-       storageName: percona-backup
+    # - name: "daily-backup"
+    #   schedule: "0 0 * * *"
+    #   keep: 5
+    #   storageName: percona-backup
     # - name: "sat-night-backup"
     #   schedule: "0 0 * * 6"
     #   keep: 3
